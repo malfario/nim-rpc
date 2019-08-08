@@ -1,4 +1,4 @@
-import net, asyncdispatch, msgpack, tables
+import net, asyncdispatch, msgpack4nim, tables
 import rpc_type
 
 type
@@ -10,11 +10,7 @@ type
 
 proc newRpcClient*(address: string, port: Port): RpcClient =
   ## Create a rpc client instance connecting to address:port.
-
-  new(result)
-  result.socket = newSocket()
-  result.address = address
-  result.port = port
+  return RpcClient(socket: newSocket(), address: address, port: port)
 
 proc sendLine(client: Socket, msg: string) =
   client.send(msg & "\c\L")
@@ -33,7 +29,7 @@ proc call* [T, U](client: RpcClient, name: string, param: T, ret: var U): State 
   ## name: Remote proc registered name
   ## param: Remote proc param
   ## ret: Remote proc return value
-  ## 
+  ##
   ## return value: Remote call procedure state, *not* remote proc return value.
   ##               If everything is ok, return Correct. Other error state, please
   ##               refer to rpc_type module.
@@ -47,7 +43,7 @@ proc call* [T, U](client: RpcClient, name: string, param: T, ret: var U): State 
 
   var state: State
   unpack(client.recvLine(), state)
-  
+
   if state != Correct:
     return state
 

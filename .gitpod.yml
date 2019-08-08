@@ -1,0 +1,6 @@
+image:
+  file: Dockerfile
+
+vscode:
+  extensions:
+    - kosz78.nim@0.6.3:wwDwukO8/OdoR71TukYCsg==
