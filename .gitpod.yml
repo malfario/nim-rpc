@@ -1,6 +1,9 @@
 image:
   file: Dockerfile
 
+tasks:
+    - init: nimble install nimrpc
+
 vscode:
   extensions:
     - kosz78.nim@0.6.3:wwDwukO8/OdoR71TukYCsg==
