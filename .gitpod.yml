@@ -2,7 +2,7 @@ image:
   file: Dockerfile
 
 tasks:
-    - init: nimble install nimrpc
+    - init: nimble install -y nimrpc
 
 vscode:
   extensions:
